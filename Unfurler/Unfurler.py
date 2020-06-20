@@ -10,15 +10,9 @@ class Unfurler:
     
     def get_oembed_data(self):
         """Get the oembed data from server """
-
-        try:
-            oembed_data = oEmbed(self.url)
-        except PyOembedException as e:
-            print(e)
-            return None
-        else:
-            o_list = [oembed_data]
-            return {"oembed": o_list}
+        oembed_data = oEmbed(self.url)
+        o_list = [oembed_data]
+        return {"oembed": o_list}
     
     def get_twitter_data(self, meta_tags: List):
         """
@@ -63,10 +57,10 @@ class Unfurler:
     
     def unfurl(self):
         """Entry point to class i.e. like run the class"""
-        data = self.get_oembed_data()
-        if data:
-            return data
-        else:
+        try:
+            data = self.get_oembed_data()
+
+        except PyOembedException:
             resp = requests.get(self.url)
             soup = BeautifulSoup(resp.text, 'lxml')
             metas: List = soup.find_all("meta")
@@ -78,6 +72,8 @@ class Unfurler:
                 return tw_data
             else:
                 return og_data
+        else:
+            return data
         
         
     
