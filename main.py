@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 from typing import List
 import requests
-
+from pyoembed import oEmbed, PyOembedException
 
 def get_twitter_tags(meta_tags: List, twitter_tags: List):
     """
@@ -48,19 +48,30 @@ if __name__ == "__main__":
     file_name = "./saved/"+domain+id+".html"
     url = "https://neilpatel.com/blog/open-graph-meta-tags/"
     try:
-        file = open(file_name)
-        resp_text = file.read()
-        file.close
-    except FileNotFoundError:
-        print("Making request to server")
-        response = requests.get(url)
-        resp_text = response.text
-        with open(file_name,"w") as git:
-            git.write(resp_text)
+        data :dict = oEmbed(url) #Get oembed data for each link 
+    except PyOembedException as e:
+        print(e)
+        try:
+            file = open(file_name)
+            resp_text = file.read()
+            file.close
+        except FileNotFoundError:
+            print("Making request to server")
+            response = requests.get(url)
+            resp_text = response.text
+            with open(file_name,"w") as git:
+                git.write(resp_text)
 
-    soup = BeautifulSoup(resp_text,"lxml")
-    metas = soup.find_all('meta')
-    og_tags =[]
-    get_og_tags(metas, og_tags)
-    for t_tag in og_tags:
-        print(t_tag)
+        soup = BeautifulSoup(resp_text,"lxml")
+        metas = soup.find_all('meta')
+        og_tags =[]
+        twitter_tags =[]
+        get_og_tags(metas, og_tags)
+        for o_tag in og_tags:
+            print(o_tag)
+        get_twitter_tags(metas,twitter_tags)
+        for t_tag in twitter_tags:
+            print(t_tag)
+    else:
+        for k,v in data.items():
+            print(k,":",v)
