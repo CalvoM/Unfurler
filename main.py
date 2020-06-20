@@ -17,6 +17,17 @@ def get_twitter_tags(meta_tags : List ):
                 twit_tag_ = split_tag[1] 
             twitter_tags.append({twit_tag_:meta.get("content")})
 
+def get_og_tags(meta_tags : List):
+    #Opengraph uses meta["property"]
+    for meta in meta_tags:
+        meta_name : str = meta.get("property")
+        if meta_name and (meta_name.startswith("og:") or meta_name.startswith("fb:")):
+            split_tag : List = meta_name.split(":")
+            if len(split_tag) > 2:
+                twit_tag_ = split_tag[1] + ":" + split_tag[2]
+            else:
+                twit_tag_ = split_tag[1] 
+            og_tags.append({twit_tag_:meta.get("content")})
 
 response = requests.Response()
 domain = "neilPatel"
@@ -36,6 +47,6 @@ except FileNotFoundError:
 
 soup = BeautifulSoup(resp_text,"lxml")
 metas = soup.find_all('meta')
-get_twitter_tags(metas)
-for t_tag in twitter_tags:
+get_og_tags(metas)
+for t_tag in og_tags:
     print(t_tag)
