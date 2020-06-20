@@ -1,5 +1,5 @@
 from Unfurler import Unfurler
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response, jsonify, abort
 
 app = Flask(__name__)
 
@@ -10,7 +10,10 @@ def home():
 @app.route("/unfurl/", methods= ["POST"])
 def unfurl():
     data = request.get_json()
-    f = Unfurler.Unfurler(data.get('url'))
+    url: str = data.get('url')
+    if url is None:
+        return abort(400,"Missing essentials")
+    f = Unfurler.Unfurler(url)
     data =f.unfurl()
     return jsonify(data)
 
