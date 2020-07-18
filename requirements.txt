@@ -1,4 +1,4 @@
 gunicorn
-beautifulsoup
+beautifulsoup==4.6.0
 Flask
 request
