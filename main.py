@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return {"msg": "Karibu Nyumbani"}
+    return {"msg": "Welcome to the unfurling site"}
 
 @app.route("/unfurl/", methods= ["POST"])
 def unfurl():
