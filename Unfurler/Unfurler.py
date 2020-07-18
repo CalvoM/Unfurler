@@ -23,6 +23,7 @@ class Unfurler:
             param1 meta_tags (List) - List containing meta tags
         """
         twitter_tags = []
+        print(meta_tags)
         for meta in meta_tags:
             meta_name: str = meta.get("name")
             if meta_name and meta_name.startswith("twitter:"):
@@ -32,6 +33,7 @@ class Unfurler:
                 else:
                     twit_tag_ = split_tag[1] 
                 twitter_tags.append({twit_tag_:meta.get("content")})
+                print(twit_tag_)
         return {"twitter": twitter_tags}
     
 
@@ -60,7 +62,8 @@ class Unfurler:
         try:
             data = self.get_oembed_data()
 
-        except PyOembedException:
+        except PyOembedException as e:
+            print(e)
             resp = requests.get(self.url)
             soup = BeautifulSoup(resp.text, 'lxml')
             metas: List = soup.find_all("meta")
