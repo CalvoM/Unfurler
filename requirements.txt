@@ -1,4 +1,7 @@
 gunicorn
-beautifulsoup4
-Flask
-request
+beautifulsoup4==4.6.0
+
+Flask==1.0.2
+
+request==1.0.2
+requests==2.22.0
