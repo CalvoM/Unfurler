@@ -35,7 +35,7 @@ func MetaScraper(url string) []*goquery.Selection {
 func main() {
 	provideUrl := flag.String("url","https://golang.org/","URL to scrape")
 	flag.Parse()
-	uf := Unfurler{url:*provideUrl}
+	uf := Unfurler.Unfurler{Url:*provideUrl}
 	uf.Unfurl()
 
 }
