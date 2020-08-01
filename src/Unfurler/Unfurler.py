@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 from typing import List, Dict
 import requests
+import json
+from src.cache import add_url
 from pyoembed import oEmbed, PyOembedException
 
 class Unfurler:
@@ -63,7 +65,7 @@ class Unfurler:
             data = self.get_oembed_data()
 
         except PyOembedException as e:
-            print(e)
+            #print(e)
             resp = requests.get(self.url)
             soup = BeautifulSoup(resp.text, 'lxml')
             metas: List = soup.find_all("meta")
@@ -72,10 +74,13 @@ class Unfurler:
             if tw_data is None or og_data is None:
                 return None
             if len(tw_data["twitter"]) >= len(og_data["og"]):
+                add_url(self.url,json.dumps(tw_data))
                 return tw_data
             else:
+                add_url(self.url,json.dumps(og_data))
                 return og_data
         else:
+            add_url(self.url,json.dumps(data))
             return data
         
         
