@@ -1,6 +1,0 @@
-gunicorn
-beautifulsoup4
-Flask
-requests
-pyoembed
-flask-redis
