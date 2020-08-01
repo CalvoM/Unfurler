@@ -1,14 +1,15 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"log"
 	"net/http"
+	"github.com/CalvoM/Unfurler"
 )
 
-func ExampleScrape() {
-	url:="http://jonathanmh.com"
+func MetaScraper(url string) []*goquery.Selection {
 	fmt.Println("Getting page",url)
 	res,err := http.Get(url)
 	if err!=nil{
@@ -22,12 +23,19 @@ func ExampleScrape() {
 	if err!=nil{
 		log.Fatal(err)
 	}
+	metas:= make([]*goquery.Selection,0)
 	doc.Find("meta").Each(func(index int, item *goquery.Selection){
+		metas = append(metas,item)
 		property,_ := item.Attr("property")
 		fmt.Println(property)
 	})
+	return metas
 }
 
 func main() {
-	ExampleScrape()
+	provideUrl := flag.String("url","https://golang.org/","URL to scrape")
+	flag.Parse()
+	uf := Unfurler{url:*provideUrl}
+	uf.Unfurl()
+
 }
