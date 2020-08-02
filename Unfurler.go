@@ -64,12 +64,12 @@ func (u *Unfurler) Unfurl() map[string]map[string]string{
 	doc.Find("meta").Each(func(index int, item *goquery.Selection){
 		metas = append(metas,item)
 	})
-	tw_ := u.getTwitterTags(metas)
-	og_ := u.getFbTags(metas)
-	if len(tw_)>=len(og_){
-		ret["twitter"] = tw_
+	tw := u.getTwitterTags(metas)
+	og := u.getFbTags(metas)
+	if len(tw)>=len(og){
+		ret["twitter"] = tw
 	}else{
-		ret["og"] = og_
+		ret["og"] = og
 	}
 	return ret
 }
