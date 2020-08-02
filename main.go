@@ -49,7 +49,7 @@ func main() {
 	mux.HandleFunc("/", homeHandler)
 	mux.HandleFunc("/unfurl/", unfurlHandler)
 	server := &http.Server{
-		Addr:"0.0.0.0:5000",
+		Addr:":5000",
 		Handler: mux,
 	}
 	_ = server.ListenAndServe()
