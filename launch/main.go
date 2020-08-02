@@ -1,41 +1,54 @@
 package main
 
 import (
-	"flag"
+	"encoding/json"
 	"fmt"
-	"github.com/PuerkitoBio/goquery"
+	"github.com/CalvoM/Unfurler"
 	"log"
 	"net/http"
-	"github.com/CalvoM/Unfurler"
 )
 
-func MetaScraper(url string) []*goquery.Selection {
-	fmt.Println("Getting page",url)
-	res,err := http.Get(url)
-	if err!=nil{
-		log.Fatal(err)
+func homeHandler(w http.ResponseWriter, r *http.Request){
+	str := `<html>
+	<head><title>Go! GO! Go!</title></head>
+	<body>
+		<h2 style="color:blue;font-family:Arial;letter-spacing:0.1em;text-align:center;">Let us Unfurl...Gentlemen shall we?</h2>
+	</body>
+	</html>
+	`
+	w.Write([]byte(str))
+}
+
+func unfurlHandler(w http.ResponseWriter, r *http.Request){
+	switch r.Method {
+		case "GET":
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			fmt.Fprintln(w,"Method is not allowed")
+		case "POST":
+			decoder:=json.NewDecoder(r.Body)
+			var u Unfurler.Unfurler
+			err:=decoder.Decode(&u)
+			if err!=nil{
+				log.Fatal(err)
+			}
+			uf := Unfurler.Unfurler{Url:u.Url}
+			jsonVal,_:=json.Marshal(uf.Unfurl())
+			w.Header().Set("Content-Type","application/json")
+			w.Write(jsonVal)
+		default:
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			fmt.Fprintln(w,"Method is not allowed")
 	}
-	defer res.Body.Close()
-	if res.StatusCode!=200 {
-		log.Fatalf("Status Code: %d %s",res.StatusCode,res.Status)
-	}
-	doc,err := goquery.NewDocumentFromReader(res.Body)
-	if err!=nil{
-		log.Fatal(err)
-	}
-	metas:= make([]*goquery.Selection,0)
-	doc.Find("meta").Each(func(index int, item *goquery.Selection){
-		metas = append(metas,item)
-		property,_ := item.Attr("property")
-		fmt.Println(property)
-	})
-	return metas
+
 }
 
 func main() {
-	provideUrl := flag.String("url","https://golang.org/","URL to scrape")
-	flag.Parse()
-	uf := Unfurler.Unfurler{Url:*provideUrl}
-	uf.Unfurl()
-
+	mux := http.NewServeMux()
+	mux.HandleFunc("/",homeHandler)
+	mux.HandleFunc("/unfurl/",unfurlHandler)
+	server := &http.Server{
+		Addr: "0.0.0.0:8080",
+		Handler:mux,
+	}
+	_=server.ListenAndServe()
 }
