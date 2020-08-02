@@ -1,11 +1,10 @@
 package Unfurler
 
 import (
-	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"log"
 	"net/http"
-	s"strings"
+	s "strings"
 )
 
 type Unfurler struct{
@@ -46,8 +45,8 @@ func (u *Unfurler) getFbTags(metas []*goquery.Selection)map[string]string{
 	}
 	return ogTags
 }
-func (u *Unfurler) Unfurl(){
-	fmt.Println("Getting page",u.Url)
+func (u *Unfurler) Unfurl() map[string]map[string]string{
+	ret:=make(map[string]map[string]string,1)
 	res,err := http.Get(u.Url)
 	if err!=nil{
 		log.Fatal(err)
@@ -61,18 +60,16 @@ func (u *Unfurler) Unfurl(){
 		log.Fatal(err)
 	}
 	metas:= make([]*goquery.Selection,0)
+	doc.Find("meta")
 	doc.Find("meta").Each(func(index int, item *goquery.Selection){
 		metas = append(metas,item)
 	})
 	tw_ := u.getTwitterTags(metas)
 	og_ := u.getFbTags(metas)
 	if len(tw_)>=len(og_){
-		for k,v:= range(tw_){
-			fmt.Println(k,v)
-		}
+		ret["twitter"] = tw_
 	}else{
-		for k,v:= range(og_){
-			fmt.Println(k,v)
-		}
+		ret["og"] = og_
 	}
+	return ret
 }
