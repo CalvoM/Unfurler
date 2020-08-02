@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
+	"os"
 	"github.com/CalvoM/Unfurler"
 )
 
@@ -45,11 +45,15 @@ func unfurlHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	port:=os.Getenv("PORT")
+	if port==""{
+		log.Fatal("PORT is not set")
+	}
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", homeHandler)
 	mux.HandleFunc("/unfurl/", unfurlHandler)
 	server := &http.Server{
-		Addr:":5000",
+		Addr:":"+port,
 		Handler: mux,
 	}
 	_ = server.ListenAndServe()
