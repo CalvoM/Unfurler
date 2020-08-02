@@ -1,1 +1,1 @@
-web: bin/unfurler
+web: bin/test
