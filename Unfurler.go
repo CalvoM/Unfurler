@@ -9,8 +9,8 @@ import (
 	"net/http"
 	s "strings"
 
+	"github.com/CalvoM/oembed"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/widnyana/oembed"
 )
 
 type Unfurler struct {
