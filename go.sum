@@ -2,8 +2,10 @@ cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMT
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
-github.com/CalvoM/Unfurler v0.1.1 h1:IoVUFGzs+XsaNaFENWD+k0/AYMkiIuoYLbMxcEzH1qI=
-github.com/CalvoM/Unfurler v0.1.1/go.mod h1:kBg4dQsbnLVzhjJG0wtywteMrqexU3gZKIIAU8Kgn44=
+github.com/CalvoM/Unfurler v0.1.2 h1:dRwwNiLBy8jAiZ1UjFMGfuHKkdOt5usm2m4Wp/hPtIA=
+github.com/CalvoM/Unfurler v0.1.2/go.mod h1:RPvaf+kjtPSG/8NYpfgvRl/aI106P6KS8QvUGGvcRkk=
+github.com/CalvoM/oembed v0.0.0-20200803133954-780e25e8eaf4 h1:oR8saKPd2io0CeOFxt0DWcHQFS3yimtEcd+sE0gDvfg=
+github.com/CalvoM/oembed v0.0.0-20200803133954-780e25e8eaf4/go.mod h1:gw4sKINQToGH+EscHTOXP6ExLAXRbgTjr5TtO/MxqQc=
 github.com/DataDog/sketches-go v0.0.0-20190923095040-43f19ad77ff7 h1:qELHH0AWCvf98Yf+CNIJx9vOZOfHFDDzgDRYsnNk/vs=
 github.com/DataDog/sketches-go v0.0.0-20190923095040-43f19ad77ff7/go.mod h1:Q5DbzQ+3AkgGwymQO7aZFNP7ns2lZKGtvRBzRXfdi60=
 github.com/Jeffail/gabs v1.4.0 h1://5fYRRTq1edjfIrQGvdkcd22pkYUrHZ5YC/H2GJVAo=
@@ -76,8 +78,6 @@ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.6.1 h1:hDPOHmpOpP40lSULcqw7IrRb/u7w6RpDC9399XyoNd0=
 github.com/stretchr/testify v1.6.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
-github.com/widnyana/oembed v0.0.0-20160307114238-10d5df7453bf h1:8mp/k2fDIwZV7PZKldHYkutUfLtxHBbBfo4aUQjh3/U=
-github.com/widnyana/oembed v0.0.0-20160307114238-10d5df7453bf/go.mod h1:4PIYP0DyIpVCMvtPRD8jlHEBn8vSUbn19ApU361xXow=
 go.opentelemetry.io/otel v0.7.0 h1:u43jukpwqR8EsyeJOMgrsUgZwVI1e1eVw7yuzRkD1l0=
 go.opentelemetry.io/otel v0.7.0/go.mod h1:aZMyHG5TqDOXEgH2tyLiXSUKly1jT3yqE9PmrzIeCdo=
 go.opentelemetry.io/otel v0.10.0 h1:2y/HYj1dIfG1nPh0Z15X4se8WwYWuTyKHLSgRb/mbQ0=
