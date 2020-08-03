@@ -53,7 +53,7 @@ func (u *Unfurler) getFbTags(metas []*goquery.Selection) map[string]string {
 }
 func (u *Unfurler) Unfurl() map[string]map[string]string {
 	ret := make(map[string]map[string]string, 1)
-	rule, err := ioutil.ReadFile("../providers.json")
+	rule, err := ioutil.ReadFile("./providers.json")
 	if err != nil {
 		log.Fatal(err)
 	}
