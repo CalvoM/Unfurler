@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/CalvoM/Unfurler"
+	"github.com/gomodule/redigo/redis"
 	"log"
 	"net/http"
 	"os"
-	"github.com/CalvoM/Unfurler"
 )
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -26,12 +27,20 @@ func unfurlHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		fmt.Fprintln(w, "Method is not allowed")
 	case "POST":
+
 		decoder := json.NewDecoder(r.Body)
 		var u Unfurler.Unfurler
 		err := decoder.Decode(&u)
 		if err != nil {
 			log.Fatal(err)
 		}
+		c,err:=redis.DialURL(os.Getenv("REDIS_URL"))
+		if err!=nil{
+			log.Fatal(err)
+		}
+		defer c.Close()
+		r,err:=c.Do("GET",u.Url)
+		fmt.Println(r)
 		uf := Unfurler.Unfurler{Url: u.Url}
 		data := uf.Unfurl()
 		jsonVal, _ := json.Marshal(data)
@@ -46,6 +55,7 @@ func unfurlHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	port:=os.Getenv("PORT")
+	fmt.Println("Running on",port)
 	if port==""{
 		log.Fatal("PORT is not set")
 	}
