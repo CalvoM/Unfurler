@@ -1,5 +1,6 @@
 __pycache__
 *.pyc
 *.sh
+.idea
+.vscode
 .idea/*
-.vscode/
