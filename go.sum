@@ -2,8 +2,6 @@ cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMT
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
-github.com/CalvoM/Unfurler v0.1.0 h1:7T5/A2h32a9cCt9vwtM+N0ANn5JL2pDe/RaIV65gR60=
-github.com/CalvoM/Unfurler v0.1.0/go.mod h1:kBg4dQsbnLVzhjJG0wtywteMrqexU3gZKIIAU8Kgn44=
 github.com/CalvoM/Unfurler v0.1.1 h1:IoVUFGzs+XsaNaFENWD+k0/AYMkiIuoYLbMxcEzH1qI=
 github.com/CalvoM/Unfurler v0.1.1/go.mod h1:kBg4dQsbnLVzhjJG0wtywteMrqexU3gZKIIAU8Kgn44=
 github.com/DataDog/sketches-go v0.0.0-20190923095040-43f19ad77ff7 h1:qELHH0AWCvf98Yf+CNIJx9vOZOfHFDDzgDRYsnNk/vs=
