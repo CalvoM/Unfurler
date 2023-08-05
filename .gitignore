@@ -1,3 +1,7 @@
 __pycache__
 *.pyc
 *.sh
+
+# Added by cargo
+
+/target
