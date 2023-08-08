@@ -1,25 +1,15 @@
 #[macro_use]
 extern crate rocket;
 
-use rocket::serde::{json::Json, Deserialize};
-
-#[derive(Deserialize)]
-#[serde(crate = "rocket::serde")]
-struct URL<'r> {
-    url: &'r str,
-}
-#[get("/")]
-fn index() -> &'static str {
-    "Welcome to the unfurling api"
-}
-
-#[post("/api/unfurl", format = "json", data = "<url>")]
-fn api_handler(url: Json<URL<'_>>) -> &'_ str {
-    let user_url = url.url;
-    user_url
-}
-
+mod api_routes;
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index, api_handler])
+    rocket::build().mount(
+        "/",
+        routes![
+            api_routes::index,
+            api_routes::api_handler,
+            api_routes::mult_path
+        ],
+    )
 }
